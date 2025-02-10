@@ -2,8 +2,9 @@ import React from 'react';
 
 function Home(props) {
     return (
-        <div>
-            test test
+        <div className="home-container">
+            <div className="cart-container"></div>
+            <div className="product-container"></div>
         </div>
     );
 }

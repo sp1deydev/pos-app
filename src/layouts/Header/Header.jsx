@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout, Menu, Dropdown, Avatar } from "antd";
-import { SettingOutlined, LogoutOutlined } from "@ant-design/icons";
+import { SettingOutlined, GlobalOutlined } from "@ant-design/icons";
 
 const { Header } = Layout;
 
@@ -12,8 +12,14 @@ const { Header } = Layout;
 
 const settingMenu = (
   <Menu>
-    <Menu.Item key="logout" icon={<LogoutOutlined />}>
+    <Menu.Item key="logout" icon={<GlobalOutlined />}>
       General
+    </Menu.Item>
+    <Menu.Item key="logout" icon={<GlobalOutlined />}>
+      Back Up Data
+    </Menu.Item>
+    <Menu.Item key="language" icon={<GlobalOutlined />}>
+      Language
     </Menu.Item>
   </Menu>
 );
