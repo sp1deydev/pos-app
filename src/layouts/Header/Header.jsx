@@ -1,25 +1,19 @@
 import React from "react";
 import { Layout, Menu, Dropdown, Avatar } from "antd";
-import { SettingOutlined, GlobalOutlined } from "@ant-design/icons";
+import { SettingOutlined, GlobalOutlined, SyncOutlined } from "@ant-design/icons";
 
 const { Header } = Layout;
 
-// const items = [
-//   { key: "1", label: "Home" },
-//   { key: "2", label: "About" },
-//   { key: "3", label: "Contact" },
-// ];
-
 const settingMenu = (
   <Menu>
-    <Menu.Item key="logout" icon={<GlobalOutlined />}>
-      General
+    <Menu.Item key="logout" icon={<SettingOutlined />}>
+      Chung
     </Menu.Item>
-    <Menu.Item key="logout" icon={<GlobalOutlined />}>
-      Back Up Data
+    <Menu.Item key="logout" icon={<SyncOutlined />}>
+      Đồng bộ dữ liệu
     </Menu.Item>
     <Menu.Item key="language" icon={<GlobalOutlined />}>
-      Language
+      Ngôn ngữ
     </Menu.Item>
   </Menu>
 );
@@ -28,9 +22,8 @@ const AppHeader = () => {
   return (
     <Header className="header-container">
       <div className="header-app-text">Vtiger CRM</div>
-      {/* <Menu theme="dark" mode="horizontal" items={items} style={{ flex: 1, justifyContent: "center" }} /> */}
       <Dropdown overlay={settingMenu} placement="bottomRight">
-        <Avatar className="dark-bg pointer-cursor" icon={<SettingOutlined />} />
+        <Avatar className="primary-bg pointer-cursor" icon={<SettingOutlined />} />
       </Dropdown>
     </Header>
   );
