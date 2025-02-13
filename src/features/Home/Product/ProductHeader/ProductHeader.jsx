@@ -1,14 +1,13 @@
 
 import {
-  DownOutlined,
   FilterOutlined,
-  UnorderedListOutlined,
   PictureOutlined,
-  UserAddOutlined,
+  UnorderedListOutlined,
+  UserAddOutlined
 } from "@ant-design/icons";
-import { Input, Button, Select, Modal, DatePicker, Form, message } from "antd";
-import { useEffect, useState } from "react";
+import { Button, DatePicker, Form, Input, message, Modal, Select } from "antd";
 import moment from "moment";
+import { useEffect, useState } from "react";
 // import axios from 'axios';
 
 
@@ -19,7 +18,7 @@ const iconBtns = {
   };
 
 function ProductHeader(props) {
-  const [messageApi, contextHolder] = message.useMessage();
+  // const [messageApi, contextHolder] = message.useMessage();
   const [form] = Form.useForm();
   const [category, setCategory] = useState(undefined);
   //   const items = [...ProductCategories];
@@ -125,7 +124,7 @@ function ProductHeader(props) {
   return (
     <div className="product-header-container">
       <div className="product-header-sub-container">
-        {contextHolder}
+        {/* {contextHolder} */}
 
         <Select
           showSearch
@@ -150,14 +149,14 @@ function ProductHeader(props) {
           value={category}
           style={{ width: "fit-content", minWidth: "10.5rem" }}
           allowClear
-          placeholder="Danh mục thuốc"
+          placeholder="Danh mục sản phẩm"
           onChange={onChangeFilter}
           options={filterData}
         />
 
         <Input
           style={{ width: "fit-content", minWidth: "8.5rem" }}
-          placeholder="Tên thuốc"
+          placeholder="Tên sản phẩm"
           onChange={productSearch}
         />
       </div>

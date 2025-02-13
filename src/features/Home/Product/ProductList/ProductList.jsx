@@ -1,12 +1,13 @@
 import { Col, Row, Avatar, Card, Pagination, Button} from 'antd';
 import { useState } from 'react';
+import { formatVietnamCurrency } from '../../../../utils/formatCurrency';
 
 const Products = [
     {
       "id": 1,
       "name": "Iphone 11 64GB",
       "image": "https://cdn.tgdd.vn/Products/Images/42/153856/iphone-xi-tim-200x200.jpg",
-      "price": 2000,
+      "price": 20000000,
       "quantity": 1,
       "isOnCart": false
     },
@@ -14,7 +15,7 @@ const Products = [
       "id": 2,
       "name": "Samsung S22 5G 128GB",
       "image": "https://cdn.tgdd.vn/Products/Images/42/231110/Galaxy-S22-Black-600x600.jpg",
-      "price": 1500,
+      "price": 1500000,
       "quantity": 1,
       "isOnCart": false
     },
@@ -190,7 +191,7 @@ function ProductList(props) {
                     <Avatar src={product.image} className='avt' shape="square" size={54} /> 
                     <div>
                         <div className='product-title'>{product.name}</div>
-                        <span className='primary-text-color'>{product.price}$</span>
+                        <span className='primary-text-color'>{formatVietnamCurrency(product.price)}</span>
                     </div>
                 </Card>
             </Col>
