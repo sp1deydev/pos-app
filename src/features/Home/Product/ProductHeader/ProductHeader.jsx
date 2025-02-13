@@ -163,19 +163,19 @@ function ProductHeader(props) {
       </div>
 
       <div className="group-btn">
-        <Button type="ghost" shape="circle" icon={iconBtns.list}></Button>
+        {/* <Button type="ghost" shape="circle" icon={iconBtns.list}></Button> */}
         <Button
           type="ghost"
           shape="circle"
           icon={iconBtns.filter}
           className="btn"
         ></Button>
-        <Button
+        {/* <Button
           type="ghost"
           shape="circle"
           icon={iconBtns.picture}
           className="btn"
-        ></Button>
+        ></Button> */}
       </div>
 
       <Modal

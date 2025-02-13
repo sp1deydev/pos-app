@@ -43,14 +43,14 @@
   background-color: #ECECEC;
 }
 .cart-container {
-  width: calc((100vw - 3rem)/2);
+  width: calc((100vw - 3rem)/2 + 7.5rem);
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 1px 1px 1px #AAA;
   padding: 0.5rem 0.5rem;
 }
 .product-container {
-  width: calc((100vw - 3rem)/2);
+  width: calc((100vw - 3rem)/2 - 7.5rem);
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 1px 1px 1px #AAA;
@@ -72,7 +72,7 @@
     width: 50%
 }
 .product-list-container {
-  height: calc(100% - 4rem);
+  height: calc(100% - 3.5rem);
   padding: 0rem 0.5rem 0.5rem 0.5rem;
   display: flex;
   flex-direction: column;
@@ -104,5 +104,48 @@
 }
 .checkout-btn {
   height: 2.5rem;
-  width: 10rem;
+  width: 12rem;
+}
+:where(.cart-table) .ant-table-container {
+  min-height: calc(100vh - 9.5rem);
+}
+:where(.cart-table) .ant-table-container {
+  scrollbar-width: thin;
+  scrollbar-color: #eaeaea transparent;
+  scrollbar-gutter: stable;
+}
+.custom-quantity-input {
+  width: 3rem;
+}
+
+/* flex box */
+.flex {
+  display: flex;
+}
+.start {
+  justify-content: flex-start;
+}
+.end {
+  justify-content: flex-end;
+}
+.gap-1 {
+  gap: 1rem;
+}
+.bold {
+  font-weight: bold;
+}
+.size-20 {
+  font-size: 20px;
+}
+.ml-1 {
+  margin-left: 1rem;
+}
+.mr-1 {
+  margin-right: 1rem;
+}
+.mb-1 {
+  margin-bottom: 1rem;
+}
+.mt-1 {
+  margin-top: 1rem;
 }

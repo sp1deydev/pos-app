@@ -6,10 +6,10 @@ const { Header } = Layout;
 
 const settingMenu = (
   <Menu>
-    <Menu.Item key="logout" icon={<SettingOutlined />}>
+    <Menu.Item key="general" icon={<SettingOutlined />}>
       Chung
     </Menu.Item>
-    <Menu.Item key="logout" icon={<SyncOutlined />}>
+    <Menu.Item key="sync" icon={<SyncOutlined />}>
       Đồng bộ dữ liệu
     </Menu.Item>
     <Menu.Item key="language" icon={<GlobalOutlined />}>
