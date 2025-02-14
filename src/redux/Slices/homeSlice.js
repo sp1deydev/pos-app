@@ -19,63 +19,6 @@ export const homeSlice = createSlice({
                         "image": "https://cdn.tgdd.vn/Products/Images/42/229949/samsung-galaxy-z-flip-3-violet-1-200x200.jpg",
                         "price": 35000000,
                         "quantity": 1,
-                        "isOnCart": false
-                    },
-                    {
-                        "id": 7,
-                        "name": "Iphone 13 Pro Max 256GB",
-                        "image": "https://cdn.tgdd.vn/Products/Images/42/230529/iphone-13-pro-max-xanh-la-thumb-200x200.jpg",
-                        "price": 1780000,
-                        "quantity": 1,
-                        "isOnCart": false
-                    },
-                    {
-                        "id": 8,
-                        "name": "Vivo Y5 series",
-                        "image": "https://cdn.tgdd.vn/Products/Images/42/249720/Vivo-y15s-2021-xanh-den-660x600.jpg",
-                        "price": 194000,
-                        "quantity": 1,
-                        "isOnCart": false
-                    },
-                    {
-                        "id": 1,
-                        "name": "Iphone 11 64GB",
-                        "image": "https://cdn.tgdd.vn/Products/Images/42/153856/iphone-xi-tim-200x200.jpg",
-                        "price": 200000,
-                        "quantity": 2,
-                        "isOnCart": false
-                    },
-                    {
-                        "id": 4,
-                        "name": "Huawei P50 Pro 5G",
-                        "image": "https://cdn.tgdd.vn/Products/Images/42/226196/huawei-p50-pro-600x600.jpg",
-                        "price": 132000,
-                        "quantity": 2,
-                        "isOnCart": false
-                    },
-                    {
-                        "id": 15,
-                        "name": "Iphone 13 Testing",
-                        "image": "https://cdn.tgdd.vn/Products/Images/42/223602/iphone-13-starlight-1-600x600.jpg",
-                        "price": 265000,
-                        "quantity": 2,
-                        "isOnCart": false
-                    },
-                    {
-                        "id": 50,
-                        "name": "Iphone 13",
-                        "image": "https://cdn.tgdd.vn/Products/Images/42/223602/iphone-13-starlight-1-600x600.jpg",
-                        "price": 3465770,
-                        "quantity": 2,
-                        "isOnCart": false
-                    },
-                    {
-                        "id": 33,
-                        "name": "Iphone 113",
-                        "image": "https://cdn.tgdd.vn/Products/Images/42/223602/iphone-13-starlight-1-600x600.jpg",
-                        "price": 2650000,
-                        "quantity": 2,
-                        "isOnCart": false
                     },
                 ]
             },
@@ -89,7 +32,6 @@ export const homeSlice = createSlice({
                         "image": "https://cdn.tgdd.vn/Products/Images/42/153856/iphone-xi-tim-200x200.jpg",
                         "price": 200000,
                         "quantity": 2,
-                        "isOnCart": false
                     },
                     {
                         "id": 4,
@@ -97,7 +39,6 @@ export const homeSlice = createSlice({
                         "image": "https://cdn.tgdd.vn/Products/Images/42/226196/huawei-p50-pro-600x600.jpg",
                         "price": 132000,
                         "quantity": 2,
-                        "isOnCart": false
                     },
                 ]
             },
@@ -112,12 +53,19 @@ export const homeSlice = createSlice({
                 label: `HĐ ${id.slice(2, 6)}`,
                 cart: [],
             }
-            state.activeCart = id;
             state.cartList.push(newCart)
         },
         deleteCart: (state, action) => {
             const id = action.payload;
             const index = state.cartList.findIndex(cartInfo => cartInfo.id === id)
+            if (id === state.activeCart) {
+                if (index + 1 == state.cartList.length) {
+                    state.activeCart = state.cartList[index - 1].id;
+                }
+                else {
+                    state.activeCart = state.cartList[index + 1].id;
+                }
+            }
             state.cartList.splice(index, 1)
         },
         activateCartTab: (state, action) => {
@@ -156,6 +104,20 @@ export const homeSlice = createSlice({
         clearCart: (state) => {
             const cartIndex = state.cartList.findIndex(cartInfo => cartInfo.id === state.activeCart)
             state.cartList[cartIndex].cart = [];
-        }
+        },
+        addToCart: (state, action) => {
+            const product = action.payload
+            const cartIndex = state.cartList.findIndex(cartInfo => cartInfo.id === state.activeCart)
+            const cartProductIndex = state.cartList[cartIndex].cart.findIndex(cart => cart.id === product.id)
+            if(cartProductIndex == -1) {
+                state.cartList[cartIndex].cart.push({...product, quantity: 1})
+                return;
+            }
+            if (state.cartList[cartIndex].cart[cartProductIndex].quantity < 100){
+                state.cartList[cartIndex].cart[cartProductIndex].quantity++;
+                return;
+            }
+        },
     }
+
 })

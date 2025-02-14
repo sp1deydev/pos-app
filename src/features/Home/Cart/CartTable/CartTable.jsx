@@ -9,7 +9,8 @@ import { useDebouncedChangeQuantity } from '../../../../hooks/useChangeQuantity'
 
 
 function CartTable(props) {
-    const { cart } = props;
+    let { cart } = props;
+    cart = [...cart].reverse();
     const dispatch = useDispatch()
 
     const handleDelete = (id) => {

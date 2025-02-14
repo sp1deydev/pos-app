@@ -43,7 +43,6 @@ function Cart(props) {
                 onEdit={onEditTabs}
                 items={items}
             />
-            {/* <CartTable cart={cart}/> */}
 
         </div>
     );
