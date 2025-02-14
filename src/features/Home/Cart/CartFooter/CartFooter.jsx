@@ -3,9 +3,15 @@ import { Button, Popconfirm } from 'antd';
 import React from 'react';
 import { formatVietnamCurrency } from '../../../../utils/formatCurrency';
 import { handleTotalPrice } from '../../../../utils/handleTotalPrice';
+import { useDispatch } from 'react-redux';
+import { homeSlice } from '../../../../redux/Slices/homeSlice';
 
 function CartFooter(props) {
     const { cart } = props
+    const dispatch = useDispatch();
+    const handleClearCart = () => {
+        dispatch(homeSlice.actions.clearCart());
+    }
     return (
             <div className="flex space-between" style={{lineHeight: '1.5rem'}}>
                 <div>
@@ -16,7 +22,7 @@ function CartFooter(props) {
                         icon={<DeleteOutlined style={{ color: 'red' }} />}
                         cancelText="Hủy"
                         okText="Xác nhận"
-                        // onConfirm={() => handleDelete(id)}
+                        onConfirm={handleClearCart}
                     >
                         <Button type="text" icon={<DeleteOutlined />} danger/>
                     </Popconfirm>

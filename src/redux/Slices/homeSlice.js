@@ -17,7 +17,7 @@ export const homeSlice = createSlice({
                         "id": 6,
                         "name": "Samsung Galaxy Z Flip3 5G 128GB",
                         "image": "https://cdn.tgdd.vn/Products/Images/42/229949/samsung-galaxy-z-flip-3-violet-1-200x200.jpg",
-                        "price": 3500000000,
+                        "price": 35000000,
                         "quantity": 1,
                         "isOnCart": false
                     },
@@ -57,7 +57,7 @@ export const homeSlice = createSlice({
                         "id": 15,
                         "name": "Iphone 13 Testing",
                         "image": "https://cdn.tgdd.vn/Products/Images/42/223602/iphone-13-starlight-1-600x600.jpg",
-                        "price": 2650,
+                        "price": 265000,
                         "quantity": 2,
                         "isOnCart": false
                     },
@@ -65,39 +65,37 @@ export const homeSlice = createSlice({
                         "id": 50,
                         "name": "Iphone 13",
                         "image": "https://cdn.tgdd.vn/Products/Images/42/223602/iphone-13-starlight-1-600x600.jpg",
-                        "price": 2650,
+                        "price": 3465770,
                         "quantity": 2,
                         "isOnCart": false
                     },
                     {
                         "id": 33,
-                        "name": "Iphone 13",
+                        "name": "Iphone 113",
                         "image": "https://cdn.tgdd.vn/Products/Images/42/223602/iphone-13-starlight-1-600x600.jpg",
-                        "price": 2650,
+                        "price": 2650000,
+                        "quantity": 2,
+                        "isOnCart": false
+                    },
+                ]
+            },
+            {
+                id: 'default 2', 
+                label: 'HĐ 2', 
+                cart: [
+                    {
+                        "id": 1,
+                        "name": "Iphone 11 64GB",
+                        "image": "https://cdn.tgdd.vn/Products/Images/42/153856/iphone-xi-tim-200x200.jpg",
+                        "price": 200000,
                         "quantity": 2,
                         "isOnCart": false
                     },
                     {
-                        "id": 33,
-                        "name": "Iphone 13",
-                        "image": "https://cdn.tgdd.vn/Products/Images/42/223602/iphone-13-starlight-1-600x600.jpg",
-                        "price": 2650,
-                        "quantity": 2,
-                        "isOnCart": false
-                    },
-                    {
-                        "id": 33,
-                        "name": "Iphone 13",
-                        "image": "https://cdn.tgdd.vn/Products/Images/42/223602/iphone-13-starlight-1-600x600.jpg",
-                        "price": 2650,
-                        "quantity": 2,
-                        "isOnCart": false
-                    },
-                    {
-                        "id": 33,
-                        "name": "Iphone 13",
-                        "image": "https://cdn.tgdd.vn/Products/Images/42/223602/iphone-13-starlight-1-600x600.jpg",
-                        "price": 2650,
+                        "id": 4,
+                        "name": "Huawei P50 Pro 5G",
+                        "image": "https://cdn.tgdd.vn/Products/Images/42/226196/huawei-p50-pro-600x600.jpg",
+                        "price": 132000,
                         "quantity": 2,
                         "isOnCart": false
                     },
@@ -106,6 +104,7 @@ export const homeSlice = createSlice({
         ],
     },
     reducers: {
+        // CART REDUCERS:
         createCart: (state) => {
             const id = uuidv4();
             const newCart = {
@@ -124,5 +123,39 @@ export const homeSlice = createSlice({
         activateCartTab: (state, action) => {
             state.activeCart = action.payload;
         },
+        deleteProductInCart: (state, action) => {
+            const id = action.payload;
+            const cartIndex = state.cartList.findIndex(cartInfo => cartInfo.id === state.activeCart)
+            const productIndex = state.cartList[cartIndex].cart.findIndex(cart => cart.id === id)
+            state.cartList[cartIndex].cart.splice(productIndex, 1)
+        },
+        decreaseQuantity: (state, action) => {
+            const id = action.payload;
+            const cartIndex = state.cartList.findIndex(cartInfo => cartInfo.id === state.activeCart)
+            const productIndex = state.cartList[cartIndex].cart.findIndex(cart => cart.id === id)
+            if(state.cartList[cartIndex].cart[productIndex].quantity === 1) {
+                return;
+            }
+            state.cartList[cartIndex].cart[productIndex].quantity--;
+        },
+        increaseQuantity: (state, action) => {
+            const id = action.payload;
+            const cartIndex = state.cartList.findIndex(cartInfo => cartInfo.id === state.activeCart)
+            const productIndex = state.cartList[cartIndex].cart.findIndex(cart => cart.id === id)
+            if(state.cartList[cartIndex].cart[productIndex].quantity === 100) {
+                return;
+            }
+            state.cartList[cartIndex].cart[productIndex].quantity++;
+        },
+        changeQuantity: (state, action) => {
+            const { id, quantity } = action.payload;
+            const cartIndex = state.cartList.findIndex(cartInfo => cartInfo.id === state.activeCart)
+            const productIndex = state.cartList[cartIndex].cart.findIndex(cart => cart.id === id)
+            state.cartList[cartIndex].cart[productIndex].quantity = quantity
+        },
+        clearCart: (state) => {
+            const cartIndex = state.cartList.findIndex(cartInfo => cartInfo.id === state.activeCart)
+            state.cartList[cartIndex].cart = [];
+        }
     }
 })

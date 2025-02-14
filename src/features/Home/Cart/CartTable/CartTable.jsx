@@ -1,22 +1,35 @@
 import { DeleteOutlined, MoreOutlined } from '@ant-design/icons';
 import { Button, Empty, InputNumber, Popconfirm, Table } from "antd";
-import React, { useState } from "react";
+import React from "react";
 import CartFooter from '../CartFooter';
 import { formatVietnamCurrency } from '../../../../utils/formatCurrency';
+import { useDispatch } from 'react-redux';
+import { homeSlice } from '../../../../redux/Slices/homeSlice';
+import { useDebouncedChangeQuantity } from '../../../../hooks/useChangeQuantity';
 
 
 function CartTable(props) {
-    const [data, setData] = useState(props.cart);
+    const { cart } = props;
+    const dispatch = useDispatch()
 
     const handleDelete = (id) => {
-
+        dispatch(homeSlice.actions.deleteProductInCart(id));
     }
     const handleMinus = (id) => {
+        dispatch(homeSlice.actions.decreaseQuantity(id));
     }
-
     const handleAdd = (id) => {
+        dispatch(homeSlice.actions.increaseQuantity(id));
     }
 
+    const onChangeQuantity = useDebouncedChangeQuantity();
+
+    const handleChangeQuantity = (id, quantity) => {
+        if (!quantity) {
+            quantity = 1;
+        }
+        onChangeQuantity(id, quantity);
+    };
 
     const columns = [
         {
@@ -56,7 +69,7 @@ function CartTable(props) {
                                 min={1} 
                                 max={100} 
                                 value={element.quantity} 
-                                // onChange={} 
+                                onChange={(quantity) => handleChangeQuantity(element.id, quantity)}  
                                 className="custom-quantity-input"
                             />
                         <Button type="ghost" onClick={() => handleAdd(element.id)}>+</Button>
@@ -108,7 +121,7 @@ function CartTable(props) {
         },
     ]
     //DATA OF TABLE
-    const dataSource = data.map((element, index) => {
+    const dataSource = cart.map((element, index) => {
         return {
             key: element.id,
             delete: element.id,
@@ -127,11 +140,10 @@ function CartTable(props) {
             dataSource={dataSource}
             pagination={false}
             scroll={{y: 488}}
-            footer={() => <CartFooter cart={data}/>}
+            footer={() => <CartFooter cart={cart}/>}
             locale={{
                 emptyText: (
                   <Empty
-                    // image={Empty.PRESENTED_IMAGE_SIMPLE}
                     description="Không có sản phẩm nào trong giỏ hàng"
                   />
                 ),
