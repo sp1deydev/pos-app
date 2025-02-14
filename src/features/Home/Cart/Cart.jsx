@@ -12,7 +12,8 @@ function Cart(props) {
 
     useEffect(() => {
         let tabList = []
-        cartList.map((cartInfo, index) => {
+        // eslint-disable-next-line
+        cartList.map((cartInfo) => {
             tabList.push({
                 label: cartInfo.label,
                 key: cartInfo.id,
