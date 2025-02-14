@@ -1,4 +1,4 @@
-import { Col, Row, Avatar, Card, Pagination, Button} from 'antd';
+import { Col, Row, Avatar, Card, Pagination, Button, Drawer} from 'antd';
 import { useState } from 'react';
 import { formatVietnamCurrency } from '../../../../utils/formatCurrency';
 
@@ -159,6 +159,7 @@ const Products = [
 
 
 function ProductList(props) {
+    const [isOpenCheckoutDrawer, setIsOpenCheckoutDrawer] = useState(false);
     const productsPerPage = 18;
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -167,7 +168,6 @@ function ProductList(props) {
     const displayProducts = Products.slice(indexOfFirstProduct, indexOfLastProduct);
     
     const onChangePage = (page) => {
-        console.log(page);
         setCurrentPage(page);
     };
 
@@ -175,6 +175,9 @@ function ProductList(props) {
         // props.onAddToCart(product);
     }
 
+    const onCloseCheckoutDrawer = () => {
+      setIsOpenCheckoutDrawer(false);
+    }
 
     const items = displayProducts.map((product, index) => {
         return (
@@ -212,8 +215,24 @@ function ProductList(props) {
                     className='pagination'
                     onChange={onChangePage}
                 />
-                <Button type='primary' className='checkout-btn'>Thanh Toán</Button>
+                <Button type='primary' className='checkout-btn' onClick={() => setIsOpenCheckoutDrawer(true)}>Thanh Toán</Button>
             </div>
+            <Drawer
+              title="Chi Tiết Đơn Hàng (Hoá Đơn X)"
+              placement="right"
+              width={620}
+              onClose={onCloseCheckoutDrawer}
+              open={isOpenCheckoutDrawer}
+              extra={
+                  <Button type="primary" className='checkout-btn'>
+                    Xác Nhận Thanh Toán
+                  </Button>
+              }
+            >
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+            </Drawer>
         </div>
     )
 }

@@ -110,7 +110,7 @@
   width: 12rem;
 }
 :where(.cart-table) .ant-table-container {
-  min-height: calc(100vh - 9.5rem);
+  min-height: calc(100vh - 13.5rem);
 }
 :where(.cart-table) .ant-table-container {
   scrollbar-width: thin;
@@ -175,4 +175,8 @@
 }
 .action-column {
   padding: 1rem 0rem !important;
+}
+.index-column {
+  padding: 1rem 0rem!important;
+  text-align: center;
 }
